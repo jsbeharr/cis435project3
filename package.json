@@ -1,0 +1,14 @@
+{
+  "name": "project3",
+  "version": "1.0.0",
+  "description": "cis435 project 3 note builder and viewer",
+  "main": "server/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
