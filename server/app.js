@@ -25,12 +25,25 @@ Get a user's note an return a json array
 */
 router.get("/note/:name", (req, res) => {
 	try {
-		const notes = fs.readFileSync(`./server/notes/${req.params.name}.txt`).toString().replace(/\r/g, "").split("\n");
+		const content = fs.readFileSync(`./server/notes/${req.params.name}.txt`);
+		const notes = content.toString().trim().replace(/\r/g, "").split("\n");
 		res.status(200).json({ "notes": notes });
 	} catch (error) {
 		res.status(400).json({ "errorMessage": `No note for user: ${req.params.name}` });
 	}
-})
+});
+
+/*
+Create a new note
+*/
+router.post("/newNote/:name", (req, res) => {
+	try {
+		fs.appendFileSync(`./server/notes/${req.params.name}.txt`, req.body.note + "\n");
+		res.status(200).json({ "message": `Created new note for ${req.params.name}` });
+	} catch (error) {
+		res.status(400).json({ "errorMessage": "Could not add new note" });
+	}
+});
 
 app.use("/api", router);
 app.listen(3000, () => {
