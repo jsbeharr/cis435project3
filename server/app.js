@@ -45,6 +45,29 @@ router.post("/newNote/:name", (req, res) => {
 	}
 });
 
+/*
+Update a note
+*/
+router.put("/updateNote/:name/:id", (req, res) => {
+	try {
+		const old_note = fs.readFileSync(`./server/notes/${req.params.name}.txt`);
+		let note_array = old_note.toString().trim().replace(/\r/g, "").split("\n");
+
+		if (note_array.length - 1 < req.params.id) {
+			throw "No note at this index";
+		}
+
+		note_array[req.params.id] = req.body.note;
+
+		const new_note = note_array.join("\n") + "\n";
+		console.log(new_note);
+		fs.writeFileSync(`./server/notes/${req.params.name}.txt`, new_note)
+		res.status(200).json({ "message": `Updated note for ${req.params.name}` });
+	} catch (error) {
+		res.status(400).json({ "errorMessage": "Coud not update note" });
+	}
+});
+
 app.use("/api", router);
 app.listen(3000, () => {
 	console.log("Server on port 3000");
