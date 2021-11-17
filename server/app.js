@@ -53,18 +53,39 @@ router.put("/updateNote/:name/:id", (req, res) => {
 		const old_note = fs.readFileSync(`./server/notes/${req.params.name}.txt`);
 		let note_array = old_note.toString().trim().replace(/\r/g, "").split("\n");
 
-		if (note_array.length - 1 < req.params.id) {
+		if (note_array.length - 1 < req.params.id || req.params.id < 0) {
 			throw "No note at this index";
 		}
 
 		note_array[req.params.id] = req.body.note;
-
 		const new_note = note_array.join("\n") + "\n";
-		console.log(new_note);
+
 		fs.writeFileSync(`./server/notes/${req.params.name}.txt`, new_note)
 		res.status(200).json({ "message": `Updated note for ${req.params.name}` });
 	} catch (error) {
 		res.status(400).json({ "errorMessage": "Coud not update note" });
+	}
+});
+
+/*
+Delete a note
+*/
+router.delete("/deleteNote/:name/:id", (req, res) => {
+	try {
+		const old_note = fs.readFileSync(`./server/notes/${req.params.name}.txt`);
+		let note_array = old_note.toString().trim().replace(/\r/g, "").split("\n");
+
+		if (note_array.length - 1 < req.params.id || req.params.id < 0) {
+			throw "No note at this index";
+		}
+
+		note_array.splice(req.params.id, 1);
+		const new_note = note_array.join("\n") + "\n";
+
+		fs.writeFileSync(`./server/notes/${req.params.name}.txt`, new_note)
+		res.status(200).json({ "message": `Deleted note for ${req.params.name}` });
+	} catch (error) {
+		res.status(400).json({ "errorMessage": "Coud not delete note" });
 	}
 });
 
