@@ -3,11 +3,42 @@
 
 <head lang="en" dir="ltr">
 	<meta charset="utf8">
+	<title>Note App</title>
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
 	<script src="scripts/notes.js"></script>
 </head>
 
 <body>
+	<header>
+		<h1>Note App</h1>
+		<nav>
+			<button>View Notes</button>
+			<button>Create Note</button>
+		</nav>
+	</header>
+
+	<!-- View Notes Page-->
+	<section id="view-notes-page">
+		<div id="users">
+			<h2 id="user-title">Users</h2>
+			<ul id="user-list">
+				<li>Person1</li>
+				<li>Person2</li>
+				<li>Person3</li>
+				<li>Person4</li>
+				<li>Person5</li>
+				<li>Person6</li>
+			</ul>
+		</div>
+		<div id="user-notes">
+			<h2 id="user-notes-title">Person 1 Notes</h2>
+			<form id="user-notes-input">
+				<input type="text" id="note0" name="note0">
+				<input type="text" id="note1" name="note1">
+				<input type="text" id="note2" name="note2">
+			</form>
+		</div>
+	</section>
 </body>
 
 </html>
