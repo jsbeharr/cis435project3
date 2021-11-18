@@ -20,7 +20,7 @@ nav {
 	margin-top: 1em;
 }
 
-nav button {
+nav button, button {
 	display: inline-block;
 	margin-left: 20px;
 	font-weight: bold;
@@ -61,4 +61,14 @@ View Notes Page
 	width: 80%;
 	margin: 0 auto;
 	padding: 10px;
+}
+
+#edit {
+	background-color: green;
+}
+
+#delete {
+	background-color: red;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
