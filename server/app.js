@@ -5,8 +5,10 @@ const router = express.Router();
 
 const fs = require("fs");
 const path = require("path");
+const cors = require("cors");
 
 app.use(bodyParser.json())
+app.use(cors())
 
 /*
 Get A List of All Users with notes
