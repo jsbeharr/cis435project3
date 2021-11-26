@@ -12,8 +12,8 @@
 	<header>
 		<h1>Note App</h1>
 		<nav>
-			<button>View Notes</button>
-			<button>Create Note</button>
+			<button id="view-notes-btn">View Notes</button>
+			<button id="create-notes-btn">Create Note</button>
 		</nav>
 	</header>
 
@@ -32,6 +32,14 @@
 	</section>
 
 	<!-- Create Note Page-->
+	<section id="create-notes-page" class="unavailable">
+		<form id="create-form">
+			<input type="text" id="username" name="username" placeholder="enter your username" required><br><br>
+			<input type="text" id="new-note" name="note" placeholder="Enter new note here" required><br><br>
+			<button id="create-btn" class="edit" type="submit">Submit</button>
+		</form>
+	</section>
+
 </body>
 
 </html>

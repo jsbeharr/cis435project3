@@ -129,7 +129,43 @@ const getUsers = () => {
 		});
 }
 
+const loadViewNotes = () => {
+	document.querySelector("#view-notes-page").className = "";
+	document.querySelector("#create-notes-page").className = "unavailable";
+}
+
+const loadCreateNotes = () => {
+	document.querySelector("#view-notes-page").className = "unavailable";
+	document.querySelector("#create-notes-page").className = "";
+}
+
+const createNote = () => {
+	event.preventDefault();
+
+	const name = document.querySelector("#username").value;
+	const newNote = document.querySelector("#new-note").value;
+
+	const requestOptions = {
+		method: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({ "note": newNote })
+	};
+
+	console.log(name);
+	console.log(newNote);
+
+	fetch(`http://localhost:3000/api/newNote/${name}`, requestOptions)
+		.then(() => location.reload())
+}
+
 const init = () => {
+	// initialize view notes and create notes handlerse
+	document.querySelector("#view-notes-btn").onclick = loadViewNotes;
+	document.querySelector("#create-notes-btn").onclick = loadCreateNotes;
+	document.querySelector("#create-form").onsubmit = createNote;
 	getUsers();
 }
 
