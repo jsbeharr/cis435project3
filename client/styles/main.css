@@ -63,12 +63,16 @@ View Notes Page
 	padding: 10px;
 }
 
-#edit {
+.edit {
 	background-color: green;
 }
 
-#delete {
+.delete {
 	background-color: red;
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+.unavailable {
+	display: none;
 }
