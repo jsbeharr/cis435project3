@@ -30,6 +30,7 @@ const confirmClick = (name, index) => {
 				// disable confirm and cancel button
 				document.querySelector(`#confirm${index}`).className = "unavailable";
 				document.querySelector(`#cancel${index}`).className = "unavailable";
+				document.querySelector(`#cancel${index}`).onclick = cancelClick(input.value, index);
 				// re enable edit button
 				document.querySelector(`#edit${index}`).className = "edit";
 			});
