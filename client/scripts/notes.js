@@ -10,6 +10,32 @@ const editClick = (index) => {
 	}
 }
 
+const confirmClick = (name, index) => {
+	return function () {
+		const input = document.querySelector(`input[name="${index}"]`);
+
+		const requestOptions = {
+			method: "PUT",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({ "note": input.value })
+		};
+
+		fetch(`http://localhost:3000/api/updateNote/${name}/${index}`, requestOptions)
+			.then(() => {
+				document.querySelector(`input[name="${index}"]`).disabled = true;
+				document.querySelector(`input[name="${index}"]`).value = input.value;
+				// disable confirm and cancel button
+				document.querySelector(`#confirm${index}`).className = "unavailable";
+				document.querySelector(`#cancel${index}`).className = "unavailable";
+				// re enable edit button
+				document.querySelector(`#edit${index}`).className = "edit";
+			});
+	}
+}
+
 const cancelClick = (note, index) => {
 	return function () {
 		// disable  text box and set original note
@@ -51,6 +77,7 @@ const usernameClick = (name) => {
 					const confirmButton = document.createElement("button")
 					confirmButton.id = `confirm${index}`;
 					confirmButton.className = "unavailable";
+					confirmButton.onclick = confirmClick(name, index);
 					confirmButton.appendChild(document.createTextNode("Confirm Change"));
 
 					const cancelButton = document.createElement("button")
