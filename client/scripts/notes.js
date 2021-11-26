@@ -50,6 +50,16 @@ const cancelClick = (note, index) => {
 	}
 }
 
+const deleteClick = (name, index) => {
+	return function () {
+		fetch(`http://localhost:3000/api/deleteNote/${name}/${index}`, { method: "DELETE" })
+			.then(() => {
+				const resetNotes = usernameClick(name);
+				resetNotes();
+			})
+	}
+}
+
 const usernameClick = (name) => {
 	return function () {
 		fetch(`http://localhost:3000/api/note/${name}`)
@@ -89,6 +99,7 @@ const usernameClick = (name) => {
 
 					const deleteButton = document.createElement("button")
 					deleteButton.className = "delete";
+					deleteButton.onclick = deleteClick(name, index);
 					deleteButton.appendChild(document.createTextNode("Delete Note"));
 
 					notesList.appendChild(input);
